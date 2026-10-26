@@ -4,6 +4,8 @@ What has been checked, how, and what has **not** been checked yet.
 
 ## Offline checks (no AWS account needed)
 
+Raw output of the latest run: [evidence/offline-validation.txt](evidence/offline-validation.txt). Re-run any time with `./scripts/verify.sh`.
+
 | Check | Tool | Result |
 |---|---|---|
 | App unit tests (6) | pytest | ✅ pass |
@@ -16,7 +18,7 @@ What has been checked, how, and what has **not** been checked yet.
 | Security scan – Terraform | Checkov | 8 passed, 5 accepted ([security.md](security.md)) |
 | GitHub Actions workflow | actionlint | ✅ pass |
 
-Reproduce: `make test lint validate`.
+Reproduce: `./scripts/verify.sh` (or `make test lint validate`).
 
 ## Live deployment checklist
 

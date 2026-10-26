@@ -1,5 +1,7 @@
 # AWS EC2-to-EKS Re-platforming
 
+[![validate](https://github.com/Lifeofdrew2/aws-eks-platform/actions/workflows/validate.yml/badge.svg)](https://github.com/Lifeofdrew2/aws-eks-platform/actions/workflows/validate.yml)
+
 Re-platforming a VM-hosted web service onto **Amazon EKS** with **Terraform**:
 a multi-AZ VPC, an EKS cluster running on EC2 managed nodes, an ECR image
 registry, and a hardened Kubernetes deployment exposed through an

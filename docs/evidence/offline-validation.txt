@@ -1,0 +1,49 @@
+# Offline validation output, captured by running ./scripts/verify.sh.
+# Recording environment: Linux, Python 3.13, OpenTofu 1.10 (Terraform-compatible) with
+# providers/modules from a local mirror (no registry access), kubeconform 0.6.7,
+# kustomize 5.6, hadolint 2.15, actionlint, Checkov. Reproduce: ./scripts/verify.sh
+verify.sh - aws-eks-platform
+date:   2026-10-26T13:04:06Z
+commit: 293525a
+
+=== App: lint (ruff) and unit tests (pytest)
+All checks passed!
+......                                                                   [100%]
+6 passed, 1 warning in 0.35s
+--> PASS
+
+=== Dockerfile lint (hadolint)
+--> PASS
+
+=== Terraform: fmt
+--> PASS
+
+=== Terraform: init + validate
+Success! The configuration is valid.
+--> PASS
+
+=== Kubernetes manifests (kustomize + kubeconform, K8s 1.33)
+Summary: 9 resources found parsing stdin - Valid: 9, Invalid: 0, Errors: 0, Skipped: 0
+--> PASS
+
+=== Security scan: Kubernetes (checkov, informational)
+Passed checks: 93, Failed checks: 3, Skipped checks: 0
+Check: CKV_K8S_14: "Image Tag should be fixed - not latest or blank"
+Check: CKV_K8S_43: "Image should use digest"
+Check: CKV_K8S_15: "Image Pull Policy should be Always"
+
+=== Security scan: Terraform (checkov, informational)
+Passed checks: 8, Failed checks: 5, Skipped checks: 0
+Check: CKV_TF_1: "Ensure Terraform module sources use a commit hash"
+Check: CKV_TF_1: "Ensure Terraform module sources use a commit hash"
+Check: CKV_TF_1: "Ensure Terraform module sources use a commit hash"
+Check: CKV_AWS_394: "Ensure aws_availability_zones data source pins zone identity so its result set does not silently expand when AWS adds an Availability Zone"
+Check: CKV_TF_1: "Ensure Terraform module sources use a commit hash"
+
+=== GitHub Actions workflows (actionlint)
+--> PASS
+
+=== Shell script syntax
+--> PASS
+
+RESULT: all checks passed
