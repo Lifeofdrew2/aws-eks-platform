@@ -1,0 +1,29 @@
+# Provisions an internet-facing Application Load Balancer through the
+# AWS Load Balancer Controller. target-type "ip" sends traffic straight to
+# pod IPs (VPC CNI), skipping the NodePort hop.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-api
+  namespace: demo
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /readyz
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    # For production: add an ACM certificate and redirect HTTP to HTTPS, e.g.
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account>:certificate/<id>
+    # alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    # alb.ingress.kubernetes.io/ssl-redirect: "443"
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-api
+                port:
+                  name: http

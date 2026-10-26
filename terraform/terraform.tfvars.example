@@ -1,0 +1,12 @@
+# Copy to terraform.tfvars and adjust. terraform.tfvars is git-ignored.
+region      = "eu-west-1"
+project     = "demo-platform"
+environment = "dev"
+
+# Your public IP, e.g. from `curl -s https://checkip.amazonaws.com`
+api_allowed_cidrs = ["203.0.113.10/32"]
+
+# Cost controls for a short-lived demo
+node_instance_types = ["t3.medium"]
+node_capacity_type  = "SPOT"
+single_nat_gateway  = true

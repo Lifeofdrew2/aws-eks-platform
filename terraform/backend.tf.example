@@ -1,0 +1,16 @@
+# Remote state (recommended for anything beyond a local experiment).
+# 1. Create a versioned, encrypted S3 bucket.
+# 2. Rename this file to backend.tf and set the bucket name.
+# 3. Run `terraform init -migrate-state`.
+#
+# use_lockfile enables S3-native state locking (Terraform >= 1.10),
+# so no DynamoDB lock table is required.
+terraform {
+  backend "s3" {
+    bucket       = "REPLACE-ME-terraform-state"
+    key          = "aws-eks-platform/dev/terraform.tfstate"
+    region       = "eu-west-1"
+    encrypt      = true
+    use_lockfile = true
+  }
+}
